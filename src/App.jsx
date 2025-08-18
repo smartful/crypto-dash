@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router';
 import AboutPage from './pages/About';
 import HomePage from './pages/Home';
+import NotFoundPage from './pages/NotFound';
 import Header from './components/Header';
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -55,6 +56,7 @@ const App = () => {
           }
         />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
