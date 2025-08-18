@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
+import CoinChart from '../components/CoinChart';
 import Spinner from '../components/Spinner';
 const API_URL = import.meta.env.VITE_COIN_API_URL;
 
@@ -13,9 +14,8 @@ const CoinDetailsPage = () => {
     const fetchCoinInfos = async () => {
       try {
         const res = await fetch(`${API_URL}/${id}`);
-        if (!res?.ok) throw new Erros('Failed to fetch data');
+        if (!res?.ok) throw new Error('Failed to fetch data');
         const data = await res.json();
-        console.log(data);
 
         setCoin(data);
       } catch (err) {
@@ -61,6 +61,8 @@ const CoinDetailsPage = () => {
             </h4>
             <h4>Last Updated: {new Date(coin.last_updated).toLocaleDateString()}</h4>
           </div>
+
+          <CoinChart coinId={coin.id} />
 
           <div className="coin-details-links">
             {coin.links.homepage[0] && (
