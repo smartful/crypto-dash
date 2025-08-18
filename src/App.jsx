@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router';
 import AboutPage from './pages/About';
+import CoinDetailsPage from './pages/CoinDetails';
 import HomePage from './pages/Home';
 import NotFoundPage from './pages/NotFound';
 import Header from './components/Header';
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_COINS_API_URL;
 
 const App = () => {
   const [coins, setCoins] = useState([]);
@@ -17,13 +18,10 @@ const App = () => {
   useEffect(() => {
     const fetchCoins = async () => {
       try {
-        const res = await fetch(
-          `${API_URL}?vs_currency=eur&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false`
-        );
-        if (!res?.ok) throw new Erros('Failde to fetch data');
+        const res = await fetch(`${API_URL}&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false`);
+        if (!res?.ok) throw new Erros('Failed to fetch data');
         const data = await res.json();
 
-        console.log(data);
         setCoins(data);
       } catch (err) {
         setError(err.message);
@@ -56,6 +54,7 @@ const App = () => {
           }
         />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/coin/:id" element={<CoinDetailsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
