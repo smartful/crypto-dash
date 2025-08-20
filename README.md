@@ -1,6 +1,8 @@
 # 🚀 Crypto Dash
 
-A webapp which show the main crypto currency information
+A webapp which show the main crypto currency information.
+
+From the Traversy Media course on Udemy : Learn React from the ground up along with modern environments such as React Router v7, TanStack, MERN, etc
 
 ## Installation
 
